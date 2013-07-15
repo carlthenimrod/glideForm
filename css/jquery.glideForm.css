@@ -1,0 +1,84 @@
+/*** glideForm CSS ***/
+.gf-form, .gf-form *{
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.gf-form{
+	background-color: #ccc;
+	border: 1px solid #aaa;
+	border-radius:  0 3px 3px 0;
+	font-size: 12px;
+	padding: 20px 50px;
+	position: fixed;
+	top: 50px;
+	width: 600px;
+	z-index: 998;
+}
+.gf-tab{
+	background-color: #ccc;
+	border-top: 1px solid #aaa;
+	border-right: 1px solid #aaa;
+	border-bottom: 1px solid #aaa;
+	border-radius:  0 5px 5px 0;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 30px 15px 30px 15px;
+	position: absolute;
+	top: 30px;
+	right: -40px;
+	text-align: center;
+	width: 40px;
+	word-wrap: break-word;
+	z-index: 999;
+}
+.gf-tab:hover{
+	cursor: pointer;
+}
+.gf-row{
+	display: table;
+	width: 100%;
+}
+.gf-form label{
+	display: table-cell;
+	font-family: Verdana;
+	font-size: 11px;
+	padding: 0 20px 0 0;
+	text-align: right;
+	vertical-align: middle;
+	width: 20%;
+}
+.gf-input{
+	display: table-cell;
+	width: 80%;
+}
+.gf-form input{
+	border: 1px solid #aaa;
+	margin: 3px 0;
+	padding: 2px 5px;
+	width: 100%;
+}
+.gf-form textarea{
+	border: 1px solid #aaa;
+	height: 120px;
+	margin: 20px 0;
+	padding: 2px 5px;
+	width: 100%;
+}
+.gf-btns{
+	display: table-cell;
+	text-align: right;
+}
+.gf-btns button{
+	background-color: #eee;
+	border: 1px solid #fff;
+	font-size: 11px;
+	font-weight: bold;
+	margin-left: 7px;
+	padding: 10px 0;
+	text-align: center;
+	width: 70px;
+}
+.gf-btns button:hover{
+	border: 1px solid #aaa;
+}
