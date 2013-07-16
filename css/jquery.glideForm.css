@@ -82,3 +82,19 @@
 .gf-btns button:hover{
 	border: 1px solid #aaa;
 }
+.gf-pagination{
+	margin: 20px 0 0 0;
+	text-align: right;
+}
+.gf-pagination div{
+	cursor: pointer;
+	display: inline;
+	font-weight: bold;
+	padding: 0 5px;
+}
+.gf-pagination div:hover{
+	text-decoration: underline;
+}
+.gf-pagination div.gf-selected{
+	text-decoration: underline;
+}

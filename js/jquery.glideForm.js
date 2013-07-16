@@ -30,9 +30,12 @@ var glideForm = {
  
  		animation: 'slide',
  		animationSpeed: 100,
+ 		cssPage: '.gf-page',
+ 		cssSelected: 'gf-selected',
  		cssTab: '.gf-tab',
  		localStorage: true,
  		open: false,
+ 		pagination: false,
  		saveInterval: 5000,
  		scroll: true,
  		width: false
@@ -49,6 +52,8 @@ var glideForm = {
 		if(this.config.localStorage && (typeof(Storage) !== "undefined")) this.localStorage();
 
 		else this.config.localStorage = false; //localStorage not supported
+
+		if(this.config.pagination) this.pagination(); //perform pagination
 	},
 
 	events: function(){
@@ -149,6 +154,37 @@ var glideForm = {
 			width = parseInt(that.config.width) + 2 + 'px'; //add 2 px for tab
 
 			that.$elem.css('left', '-' + width); //set left position
+		});
+
+		this.$elem.on('click', '.gf-previous', function(){
+
+			if(that.pages.current > 1){
+
+				--that.pages.current;
+
+				that.createPages();
+			}
+		});
+
+		this.$elem.on('click','.gf-page-link', function(){
+
+			var id;
+
+			id = $(this).attr('id');
+
+			that.pages.current = id;
+
+			that.createPages();
+		});
+
+		this.$elem.on('click', '.gf-next', function(){
+
+			if(that.pages.current < that.pages.count){
+
+				++that.pages.current;
+
+				that.createPages();
+			}
 		});
 	},
 
@@ -265,6 +301,88 @@ var glideForm = {
 		});
 
 		return o;
+	},
+
+	pagination: function(){
+
+		//create pages object
+		this.pages = {
+
+			count: $(this.config.cssPage).length,
+
+			current: 1
+		}
+
+		//if less than 2 pages, just return
+		if(this.pages.count < 2) return;
+
+		//create pages
+		this.createPages();
+	},
+
+	createPages: function(){
+
+		var pagination, page, next, previous, i, l, pageNum, current;
+
+		if($('.gf-pagination').length > 0) $('.gf-pagination').remove();
+
+		//hide pages
+		$(this.config.cssPage).hide();
+
+		//current, show
+		current = $(this.config.cssPage)[this.pages.current - 1];
+		$(current).show();
+
+		pagination = $('<div></div>', {
+
+			class: 'gf-pagination'
+		});
+
+		if(this.pages.current > 1){
+
+			//create previous link
+			previous = $('<div></div>', {
+
+				class: 'gf-previous',
+				title: 'Previous'
+			}).html('<< Previous');
+
+			pagination.append(previous);
+		}
+
+		//for each page
+		for(i = 0, l = this.pages.count; i < l; ++i){
+
+			pageNum = i + 1;
+
+			page = $('<div></div>', {
+
+				class: 'gf-page-link',
+				id: pageNum,
+				title: 'Page ' + pageNum
+			}).html(pageNum);
+
+			if(pageNum === this.pages.current){
+
+				page.addClass(this.config.cssSelected);
+			}
+
+			pagination.append(page);
+		}
+
+		if(this.pages.current < this.pages.count){
+
+			//create next link
+			next = $('<div></div>', {
+
+				class: 'gf-next',
+				title: 'Next'
+			}).html('Next >>');
+
+			pagination.append(next);
+		}
+		
+		this.$elem.append(pagination);
 	}
 };
  
